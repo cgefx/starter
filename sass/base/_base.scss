@@ -1,0 +1,44 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+//the key to understanding responsive design is the arrangement of the media queries and how they cascade. For example, if there is a screen size of 700, both tab-land and tab-port are true, but only tab-port is applied since it comes last.  this particular example is for desktop first, mobile first would go in the reverse order.
+
+html {
+	//This defines what 1rem is.  100% = 16px.
+	//The entire layout depends on this one value;
+	font-size: 62.5%; // 1rem = 10px
+
+	@include respond(tab-land) {
+		// width < 1200?
+		font-size: 56.25%; //1rem = 9px, 9/16 = 56.25%
+	}
+
+	@include respond(tab-port) {
+		//width < 900?
+		font-size: 50%; //1rem = 8px, 8/16 = 50%
+	}
+
+	@include respond(big-desktop) {
+		//width > 1800?
+		font-size: 75%; //1rem = 12px, 12/16 = 75%
+	}
+}
+
+body {
+	box-sizing: border-box;
+	padding: 3rem;
+
+	@include respond(tab-port) {
+		padding: 0;
+	}
+}
+
+::selection {
+	background-color: $color-primary;
+	color: $color-white;
+}
